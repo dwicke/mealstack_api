@@ -7,8 +7,6 @@ executors:
       - image: circleci/buildpack-deps:stretch
 jobs:
   build:
-    context:
-      - DOCKERHUB
     executor: docker-publisher
     steps:
       - checkout
@@ -67,6 +65,7 @@ workflows:
             branches:
               only: main
       - publish-latest:
+          context: DOCKERHUB
           requires:
             - build
           filters:
@@ -83,6 +82,7 @@ workflows:
       - publish-tag:
           requires:
             - build
+          context: DOCKERHUB
           filters:
             tags:
               only: /^v.*/
