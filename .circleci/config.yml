@@ -7,6 +7,8 @@ executors:
       - image: circleci/buildpack-deps:stretch
 jobs:
   build:
+    context:
+      - DOCKERHUB
     executor: docker-publisher
     steps:
       - checkout
